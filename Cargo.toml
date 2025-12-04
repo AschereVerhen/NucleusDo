@@ -1,0 +1,8 @@
+[package]
+name = "doas-lite"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+syscalls = { version = "0.7.0", features = ["x86_64"] }
+yescrypt = "0.1.0-rc.0"
