@@ -1,6 +1,6 @@
 use syscalls::{Sysno, syscall, Errno};
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum PrivState {
     FullRoot, //rid,eid,sid == 0
     HalfRoot, //eid,sid==0; rid!=0;
@@ -49,7 +49,6 @@ pub fn setuid(uid: usize, gid: usize) -> Result<(), Errno> {
     }
     Ok(())
 }
-
 pub fn _exit(exit_code: i32) -> ! {
     unsafe {
         let _ = syscall!(Sysno::exit, exit_code);

@@ -53,7 +53,7 @@ pub fn open_shadow() -> Result<Vec<u8>, Errno> {
     Ok(contents)
 }
 
-pub fn get_hash256(shadow: Vec<u8>, username: String) -> Result<String, Errno> {
+pub fn get_hash(shadow: Vec<u8>, username: String) -> Result<String, Errno> {
     let shadow_string = match String::from_utf8(shadow) {
         Ok(s) => s,
         Err(_) => _exit(255)
