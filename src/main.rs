@@ -21,7 +21,7 @@ fn main() {
     let target_uid = 0;
     let target_gid = 0;
 
-    let password = match passwd::read_passwd() {
+    let mut password = match passwd::read_passwd() {
         Ok(vec) => vec,
         Err(err) => {
             eprintln!("An error occured: {err:?}");
@@ -63,6 +63,12 @@ fn main() {
     if ! is_match {
         println!("Password is invalid.");
         uid::_exit(255)
+    }
+
+    //Since the password is correct, we should remove the bits of that password.
+    let raw_ptr = password.as_mut_ptr();
+    unsafe {
+        std::ptr::write_bytes(raw_ptr, 0xFF, password.len());
     }
     run::run();
     let og_uid: usize = rid.try_into().unwrap();
