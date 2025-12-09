@@ -18,6 +18,11 @@ fn main() {
         run::run(); //Start the run command early on.
         uid::_exit(0);
     }
+    
+    if state == uid::PrivState::UnknownState {
+        uid::_exit(255); //We do not want to go further. Permissions are messed up.
+    }
+
     let target_uid = 0;
     let target_gid = 0;
 
